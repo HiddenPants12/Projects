@@ -1,2 +1,714 @@
 # Projects
-<script src="https://github.com/HiddenPants12/Projects/blob/master/script.js"></scipt>
+<script src="https://liabru.github.io/matter-attractors/libs/matter.js"></script>
+<script src="https://liabru.github.io/matter-attractors/libs/matter-wrap.js"></script>
+<script src="https://liabru.github.io/matter-attractors/libs/matter-tools.demo.js"></script>
+<script src="https://liabru.github.io/matter-attractors/libs/bundle.js"></script>
+<style>
+  .toggleMenu:hover {
+    filter: brightness(110%);
+  }
+
+  #bottomMenu {
+    position: absolute;
+    display: none;
+    z-index: 5;
+    width: 100%;
+    height: 0%;
+    left: 0px;
+    top: 0px;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+    overflow: scroll;
+  }
+
+  #bMenuTopButton {
+    background-color: rgba(40, 40, 41, 0);
+    color: white;
+    border: 2px solid;
+    padding: 10px;
+    font-weight: 300;
+    font-size: .7em;
+    font-family: 'Lato';
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    z-index: 5;
+    left: 31%;
+    top: -15px;
+  }
+
+  #sideMenu {
+    position: absolute;
+    display: none;
+    z-index: 6;
+    width: 0px;
+    height: 0px;
+    left: 0px;
+    top: 0px;
+    color: #cfcece;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+    padding: 1px;
+    margin: 1px;
+  }
+
+  #planetsSection {
+    position: absolute;
+    display: block;
+    z-index: 5;
+    width: 0px;
+    height: 0px;
+    left: 0px;
+    top: 0px;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+    overflow: scroll;
+  }
+
+  .bMenuTopButtonGradient:hover {
+    filter: brightness(130%);
+  }
+
+  #bottomBar {
+    position: absolute;
+    width: 10%;
+    height: 10px;
+    top: 100px;
+    left: 0px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgba(12, 12, 12, 0.7);
+  }
+
+  #myRange2 {
+    z-index: 5;
+  }
+
+  .slidecontainer2 {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 10px;
+  }
+
+  .slider2 {
+    -webkit-appearance: none;
+    width: 10%;
+    height: 15px;
+    top: 35%;
+    left: 30px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    position: relative;
+    z-index: 5;
+  }
+
+  .slider2:hover {
+    opacity: 1;
+  }
+
+  .slider2::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #242424;
+    cursor: pointer;
+  }
+
+  .slider2::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+
+  #timescaleHTMLNum2 {
+    position: absolute;
+    font-family: cursive;
+    color: rgb(130, 128, 128);
+    z-index: 5;
+  }
+
+  #bbMenuTopFreezeTime {
+    border: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    top: 0px;
+    left: 0px;
+    font-style: 0px;
+    font-size: 35px;
+    font-family: cursive;
+    color: rgb(5, 5, 5);
+    background: rgba(255, 255, 255, 0);
+    width: 50px;
+    opacity: 1;
+    -webkit-transition: 1s;
+    transition: opacity .2s;
+  }
+
+  #addBarSection {}
+
+  #barSectionTopButtons {
+    background-color: rgba(40, 40, 41, 0);
+    color: gray;
+    border: 1px solid;
+    padding: 3px;
+    font-weight: 300;
+    font-size: .7em;
+    font-family: 'Lato';
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    z-index: 5;
+    left: 0vw;
+    top: 25%;
+    height: 50%
+  }
+
+  #barSectionTopButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .addChooserDiv {
+    position: absolute;
+    z-index: 5;
+    width: 99%;
+    height: 80%;
+    left: 0%;
+    top: 15%;
+    color: #cfcece;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0);
+    background-color: rgba(5, 5, 5, 0.863);
+    overflow: scroll;
+  }
+
+  #toolsBarSection {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    width: 0%;
+    height: 0%;
+    left: 0%;
+    top: 0px;
+    color: #cfcece;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+  }
+
+  #settingsBarSection {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    width: 0%;
+    height: 0%;
+    left: 0%;
+    top: 0px;
+    color: #cfcece;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+  }
+
+  #addBarSectionOptions {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    width: 0%;
+    height: 0%;
+    left: 0%;
+    top: 0px;
+    color: #cfcece;
+    border-style: solid;
+    border-color: rgba(40, 40, 41, 0.863);
+    background-color: rgba(40, 40, 41, 0.863);
+  }
+
+  #thing {
+    width: 50px;
+    height: 100%;
+    z-index: 5;
+  }
+
+  #bbMenuTopFreezeTime:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #timeInSim2 {
+    position: relative;
+    top: 15%;
+    left: 0%;
+  }
+
+  .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+
+  .dropup {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropup-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    bottom: 60px;
+    z-index: 10;
+  }
+
+  .dropup-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropup-content a:hover {
+    background-color: #ccc
+  }
+
+  .dropup:hover .dropup-content {
+    display: block;
+  }
+
+  .dropup:hover .dropbtn {
+    background-color: #2980B9;
+  }
+
+  #timeInSim3 {
+    position: relative;
+    top: 0%;
+    left: 10px;
+  }
+
+  #thing2 {
+    position: relative;
+    left: 5%;
+    width: 10%;
+    height: 100%;
+    z-index: 5;
+  }
+
+  #menuIMG {
+    border: 1px none;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: 'Lato';
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    z-index: 5;
+    left: 0vw;
+    top: 0%;
+    height: 25px;
+    width: 25px;
+  }
+
+  #menuIMG:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #menuDiv {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    display: none;
+    background-color: rgba(12, 12, 12, 0.7);
+  }
+
+  #leftMenuDivDiv {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    border: solid 0px;
+    width: 70%;
+    height: 10%;
+    z-index: 5;
+    transition: background-color 0.5s;
+  }
+
+  #leftMenuDivDiv:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #leftMenuButtons {
+    background-color: rgba(40, 40, 41, 0);
+    width: 50%;
+    height: 10%;
+    color: gray;
+    border: 1px solid;
+    padding: 0px;
+    font-weight: 300;
+    font-size: .7em;
+    font-family: 'Lato';
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    z-index: 5;
+  }
+
+  #leftMenuButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #leftMenuDivIMG {
+    position: relative;
+    top: 15%;
+    height: 70%;
+    filter: invert(100%);
+  }
+
+  #leftMenuDivDivDisc {
+    position: relative;
+    top: 35%;
+    color: white;
+    font-size: 80%;
+  }
+
+  #infoDIV {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    z-index: 6;
+    display: none;
+    background-color: rgba(12, 12, 12, 0.9);
+    overflow: none;
+  }
+
+  #infoText {
+    color: white;
+  }
+
+  #infoDivTextDiv {
+    position: absolute;
+    background-color: rgba(29, 30, 32, 1);
+    top: 10%;
+    left: 0%;
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+  }
+
+  #barSectionXButton {
+    position: absolute;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.5s;
+    height: 10%;
+    width: auto;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    font-family: cursive;
+    color: white;
+    outline: none;
+  }
+
+  #barSectionXButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #addBodiesBottomBarMain {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    display: none;
+    justify-content: flex-start;
+    background-color: rgba(12, 12, 12, 0.1);
+  }
+
+  .selectedBottomBarClass {
+    display: none;
+  }
+
+  #addBodiesBottomBarMainTop {
+    position: absolute;
+    width: 90%;
+    height: 30px;
+    top: 0px;
+    left: 10%;
+    z-index: 5;
+    justify-content: flex-start;
+    background-color: rgb(66, 66, 66, 0.3)
+  }
+
+  #barSectionAddXButton {
+    position: absolute;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.5s;
+    height: 100%;
+    width: auto;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    font-family: cursive;
+    color: white;
+    outline: none;
+  }
+
+  #barSectionAddXButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #addBodiesBottomBarMainTopButtons {
+    position: relative;
+    cursor: pointer;
+    border: solid 0px;
+    height: 100%;
+    width: auto;
+    z-index: 5;
+    transition: background-color 0.5s;
+  }
+
+  #addBodiesBottomBarMainTopButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #addStars {
+    position: absolute;
+    width: 90%;
+    height: 70%;
+    top: 30px;
+    left: 10%;
+    z-index: 5;
+    background-color: rgb(0, 0, 0, 0.5);
+    overflow: auto;
+  }
+
+  #addStars::-webkit-scrollbar {
+    width: 1em;
+  }
+
+  #addStars::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+  }
+
+  #addStars::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+
+  .addBodiesTopBarClass {
+    display: none;
+  }
+
+  #addBodiesButtonDiv {
+    position: relative;
+    cursor: pointer;
+    border: solid 0px;
+    height: 120px;
+    width: 90px;
+    z-index: 5;
+    float: left;
+    background-color: rgba(0, 0, 0, 1);
+    transition: background-color 0.5s;
+    overflow: hidden;
+  }
+
+  #addBodiesButtonDiv:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  #planetImg {
+    position: relative;
+    height: auto;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+  }
+
+  #addStarsButtonDivDiv {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.15);
+    z-index: 5;
+    color: gray;
+  }
+
+  #AddStarsText {
+    color: white;
+    font-size: 15px;
+  }
+
+  #addBodiesSettings {
+    position: absolute;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 10%;
+    height: 90%;
+  }
+
+  #addBodiesSettingsButtons {
+    position: relative;
+    float: left;
+    background-color: rgba(40, 40, 41, 0);
+    color: gray;
+    border: 1px solid;
+    padding: 3px;
+    font-weight: 300;
+    font-size: .7em;
+    font-family: 'Lato';
+    cursor: pointer;
+    outline: none;
+    z-index: 5;
+    left: 10px;
+    top: 10px;
+    height: 30px;
+  }
+
+  #addBodiesSettingsButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+</style>
+<div id="bottomBar">
+  <input type="button" id="bbMenuTopFreezeTime" onclick="timeFreezeToggle()">
+  <div id="thing">
+    <p id="timeInSim2"></p>
+  </div>
+  <button onclick="moveTimestep()" id="barSectionTopButtons">One Timestep</button>
+  <div class="dropup">
+    <button id="barSectionTopButtons">Step</button>
+    <div class="dropup-content">
+      <a href="#" onclick="showedStep = 'auto'">Auto</a>
+      <a href="#" onclick="showedStep = 'ms'">MS</a>
+      <a href="#" onclick="showedStep = 'sec'">Sec</a>
+      <a href="#" onclick="showedStep = 'min'">Min</a>
+      <a href="#" onclick="showedStep = 'hour'">Hour</a>
+      <a href="#" onclick="showedStep = 'day'">Day</a>
+    </div>
+  </div>
+  <div id="thing">
+    <p id="timeInSim3"></p>
+  </div>
+  <input type="range" min="-10" max="10" value="0" class="slider2" id="myRange" onmouseover="drag = true" onmouseout="drag = false" onmousedown="drag2 = true" onmouseup="drag2 = false">
+  <div id="thing2">
+    <button onclick="" id="barSectionTopButtons">edit</button>
+    <button onclick="toggleBottomBarSection(0)" id="barSectionTopButtons">add</button>
+  </div>
+</div>
+<img src="https://i.ya-webdesign.com/images/3-lines-png-2.png" id="menuIMG" onclick="rightMenuToggle()">
+<div id="menuDiv">
+  <div id="leftMenuDivDiv" onclick="clearBodies(world.bodies)">
+    <img src="https://image.flaticon.com/icons/png/512/57/57581.png" id="leftMenuDivIMG">
+    <span id="leftMenuDivDivDisc">New Simulation</span>
+  </div>
+  <div id="leftMenuDivDiv">
+    <img src="https://webstockreview.net/images/settings-icon-png-10.png" id="leftMenuDivIMG">
+    <span id="leftMenuDivDivDisc">Settings</span>
+  </div>
+  <div id="leftMenuDivDiv" onclick="toggleInfo()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Minimalist_info_Icon.png" id="leftMenuDivIMG">
+    <span id="leftMenuDivDivDisc">Information</span>
+  </div>
+</div>
+<div id="infoDIV">
+  <button onclick="toggleInfo()" id="barSectionXButton">X</button>
+  <div id="infoDivTextDiv">
+    <p id="infoText"></p>
+  </div>
+</div>
+<div id="addBodiesBottomBarMain" class="selectedBottomBarClass" name="add">
+  <div id="addBodiesSettings">
+    <button id="addBodiesSettingsButtons" onclick="spawnType = 'static'">Static</button>
+    <button id="addBodiesSettingsButtons" onclick="spawnType = 'orbit'">Orbit</button>
+  </div>
+  <div id="addBodiesBottomBarMainTop">
+    <img onclick="toggleBottomBarAddBodiesSection(0)" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" id="addBodiesBottomBarMainTopButtons">
+    <img onclick="toggleBottomBarAddBodiesSection(1)" src="https://icons-for-free.com/iconfiles/png/512/windows+10+cinema+icons+Planet-1320567864364527246.png" id="addBodiesBottomBarMainTopButtons">
+    <img onclick="toggleBottomBarAddBodiesSection(2)" src="https://cdn.onlinewebfonts.com/svg/img_39469.png" id="addBodiesBottomBarMainTopButtons">
+    <img onclick="toggleBottomBarAddBodiesSection(3)" src="https://www.flaticon.com/premium-icon/icons/svg/360/360764.svg" id="addBodiesBottomBarMainTopButtons">
+    <button onclick="toggleBottomBarSection(0)" id="barSectionAddXButton">X</button>
+  </div>
+  <div id="addStars" class="addBodiesTopBarClass">
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'sun'">
+      <img src="https://i.ya-webdesign.com/images/nasa-png-of-sun-1.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Sun</span>
+      </div>
+    </div>
+  </div>
+  <div id="addStars" class="addBodiesTopBarClass">
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'earth'">
+      <img src="https://www.pngarts.com/files/3/Planet-Earth-Transparent-Background-PNG.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Earth</span>
+      </div>
+    </div>
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'mercury'">
+      <img src="https://i0.wp.com/freepngimages.com/wp-content/uploads/2016/05/planet-mercury-transparent-background.png?fit=680%2C680" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Mercury</span>
+      </div>
+    </div>
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'venus'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Venus_globe_-_transparent_background.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Venus</span>
+      </div>
+    </div>
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'mars'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Mars_transparent.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Mars</span>
+      </div>
+    </div>
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'jupiter'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Jupiter</span>
+      </div>
+    </div>
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'saturn'">
+      <img src="http://assets.stickpng.com/thumbs/580b585b2edbce24c47b270d.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Saturn</span>
+      </div>
+    </div>
+  </div>
+  <div id="addStars" class="addBodiesTopBarClass">
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'moon'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Weather_icon_-_full_moon.svg/512px-Weather_icon_-_full_moon.svg.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Moon</span>
+      </div>
+    </div>
+  </div>
+  <div id="addStars" class="addBodiesTopBarClass">
+    <div id="addBodiesButtonDiv" onclick="addSelectedSectionBody = 'moon'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Weather_icon_-_full_moon.svg/512px-Weather_icon_-_full_moon.svg.png" id="planetImg">
+      <div id="addStarsButtonDivDiv">
+        <span id="AddStarsText">Moon2</span>
+      </div>
+    </div>
+  </div>
+</div>
